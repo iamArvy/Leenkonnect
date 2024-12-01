@@ -1,19 +1,19 @@
 <script setup>
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
-import ActionMessage from '@/Components/ActionMessage.vue';
-import ActionSection from '@/Components/ActionSection.vue';
-import Checkbox from '@/Components/Checkbox.vue';
-import ConfirmationModal from '@/Components/ConfirmationModal.vue';
-import DangerButton from '@/Components/DangerButton.vue';
-import DialogModal from '@/Components/DialogModal.vue';
-import FormSection from '@/Components/FormSection.vue';
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
-import SectionBorder from '@/Components/SectionBorder.vue';
-import TextInput from '@/Components/TextInput.vue';
+import ActionMessage from '@/Components/JS/ActionMessage.vue';
+import ActionSection from '@/Components/JS/ActionSection.vue';
+import Checkbox from '@/Components/JS/Checkbox.vue';
+import ConfirmationModal from '@/Components/JS/ConfirmationModal.vue';
+import DangerButton from '@/Components/JS/DangerButton.vue';
+import DialogModal from '@/Components/JS/DialogModal.vue';
+import FormSection from '@/Components/JS/FormSection.vue';
+import InputError from '@/Components/JS/InputError.vue';
+import InputLabel from '@/Components/JS/InputLabel.vue';
+import PrimaryButton from '@/Components/JS/PrimaryButton.vue';
+import SecondaryButton from '@/Components/JS/SecondaryButton.vue';
+import SectionBorder from '@/Components/JS/SectionBorder.vue';
+import TextInput from '@/Components/JS/TextInput.vue';
 
 const props = defineProps({
     tokens: Array,

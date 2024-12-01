@@ -1,10 +1,12 @@
 <?php
 
 namespace Database\Seeders;
-
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +15,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $role = Role::findOrCreate('superuser');
+        $permissions = Permission::all();
+        $role->syncPermissions($permissions);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $email = env('SUPERUSER_EMAIL', 'default@example.com'); // Default fallback value
+        $password = env('SUPERUSER_PASSWORD', 'defaultPassword');
+        $user = User::where('email', $email)->first();
+        // dd($email);
+        if(!$user){
+            $user = User::create([
+                'name' => 'superuser',
+                'email' => $email,
+                'password' => Hash::make($password)
+            ]);
+        }
+        $user->assignRole($role);
     }
 }
