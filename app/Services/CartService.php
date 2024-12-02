@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Repositories\CartRepository;
+use Session;
 
 class CartService
 {
@@ -12,9 +13,9 @@ class CartService
         $this->cartRepository = $cartRepository;
     }
 
-    public function addProductToCart($userId, $productId, $quantity)
+    public function addProductToCart($product, $quantity)
     {
-        return $this->cartRepository->addProduct($userId, $productId, $quantity);
+
     }
 
     public function updateProductQuantity($userId, $productId, $quantity)

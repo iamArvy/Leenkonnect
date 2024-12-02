@@ -11,12 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('categories', function(Blueprint $table){
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('sku')->unique();
             $table->string('name');
             $table->string('image', 2048);
-            $table->string('category');
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->text('description');
             $table->decimal('price', 8, 2);
             $table->json('gallery')->nullable();
@@ -26,16 +32,12 @@ return new class extends Migration
             $table->json('features')->nullable();
             $table->json('tags')->nullable();
             $table->string('slug')->unique();
+            $table->boolean('is_active')->default(true);
+            $table->boolean('is_featured')->default(false);
             $table->timestamps();
             $table->index('sku');
-            $table->index('category');
         });
 
-        Schema::create('featured_products', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
-            $table->timestamps();
-        });
     }
 
     /**
@@ -43,7 +45,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('featured_products');
         Schema::dropIfExists('products');
+        Schema::dropIfExists('categories');
     }
 };

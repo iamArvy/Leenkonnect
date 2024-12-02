@@ -18,16 +18,14 @@ class Product extends Model
         'sku',
         'name',
         'image',
-        'category',
+        'category_id',
         'description',
         'price',
         'gallery',
-        'stock',
         'model',
         'brand',
         'features',
         'tags',
-        'slug',
     ];
 
     // Specify which attributes should be cast to specific types
@@ -63,15 +61,51 @@ class Product extends Model
         return $query->where('stock', '>', 0);  // Filter products that are in stock
     }
 
+    public function scopeIsFeatured($query)
+    {
+        return $query->where('is_featured', true);  // Filter products that are featured
+    }
+
+    public function scopeIsActive($query)
+    {
+        return $query->where('is_active', true);  // Filter products that are active
+    }
+
     // Example of a custom accessor (optional)
     public function getPriceAttribute($value)
     {
         return number_format($value, 2); // Format the price to 2 decimal places
     }
 
-    // You can also define relationships here, such as if a product belongs to a category or has many reviews.
-    // Example: Get the category of the product
-    // public function category() {
-    //     return $this->belongsTo(Category::class);
-    // }
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function reviews() {
+        return $this->hasMany(Review::class);
+    }
+
+    public function reduceStock($quantity)
+    {
+        $this->stock -= $quantity;
+        $this->save();
+    }
+
+    public function addStock($quantity)
+    {
+        $this->stock += $quantity;
+        $this->save();
+    }
+
+    public function changeFeaturedStatus()
+    {
+        $this->is_featured = !$this->is_featured;
+        $this->save();
+    }
+
+    public function changeActiveStatus()
+    {
+        $this->is_active = !$this->is_active;
+        $this->save();
+    }
 }

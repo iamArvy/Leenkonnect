@@ -32,24 +32,24 @@
             <slot />
         </main>
 
-        <footer class="bg-primary text-gray-500 font-satoshi p-4 w-full relative">
-            <section class="grid grid-cols-2 max-w-screen-xl mx-auto bg-black px-8 rounded-xl absolute top-[-80px] h-[190px] items-center">
+        <footer class="bg-primary text-white font-satoshi w-full">
+            <!-- <section class="grid grid-cols-2 max-w-screen-xl mx-auto bg-black px-8 rounded-xl absolute top-[-80px] h-[190px] items-center">
                  <h1 class="text-4xl text-white self-center">Stay up to date about our latest offers</h1>
                 <div class="grid grid-rows-2 gap-2">
                     <div class="rounded-3xl bg-white flex flex-row align-center p-4"><i class="bx bx-user-circle "></i><input class="flex-grow outline-none border-none" placeholder="Enter Email Address" type="text"></div>
                     <Button secondary class="w-full">Subscribe to Newsletter</Button>
                 </div>
-            </section>
-            <section class="max-w-screen-xl mt-[120px] grid grid-cols-6">
+            </section> -->
+            <section class="max-w-screen-xl px-4 my-[80px] grid grid-cols-6 mx-auto">
                 <div class="col-span-2">
-                    <h1 class="text-2xl h-10 text-black">Emporium</h1>
+                    <h1 class="text-2xl h-10 text-white font-semibold">Leenkonnect</h1>
                     <div>
                         <p class="text-sm font-satoshi">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, accusantium.</p>
                         <div></div>
                     </div>
                 </div>
                 <nav class="" v-for="(item, index) in footerNavs" :key="index">
-                    <h3 class="text-base font-satoshi font-medium h-10 text-black" >{{ item.title }}</h3>
+                    <h3 class="text-base font-satoshi font-medium h-10 text-white" >{{ item.title }}</h3>
                     <ul class="flex flex-col gap-3">
                         <li v-for="(link, index) in item.links" :key="index" class="text-sm font-satoshi font-light" >
                             <Link :href="link.href">{{ link.title }}</Link>
@@ -57,11 +57,8 @@
                     </ul>
                 </nav>
             </section>
-            <br>
-            <hr>
-            <br>
-        <div class="max-w-screen-xl mx-auto text-center">
-            <p class="text-gray-500">&copy; 2024 My Website. All rights reserved.</p>
+        <div class="w-full mx-auto text-center bg-black p-4">
+            <p class="text-gray-500">Copyright &copy; 2024 Leenkonnect. All rights reserved.</p>
         </div>
         </footer>
     </div>

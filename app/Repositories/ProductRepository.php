@@ -31,4 +31,23 @@ class ProductRepository
     {
         return Product::destroy($id);
     }
+
+    /**
+     * Apply scopes dynamically and return the result.
+     *
+     * @param array $scopes
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getWithScopes(array $scopes = [])
+    {
+        $query = $this->model->newQuery();
+
+        foreach ($scopes as $scope => $parameters) {
+            if (method_exists($this->model, 'scope' . ucfirst($scope))) {
+                $query->{$scope}(...(array) $parameters);
+            }
+        }
+
+        return $query->get();
+    }
 }
