@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
+use App\Services\CartService;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -36,6 +37,7 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
+            'cart' => fn () => app(CartService::class)->getCart(),
         ];
     }
 }

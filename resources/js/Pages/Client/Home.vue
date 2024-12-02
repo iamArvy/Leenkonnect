@@ -20,10 +20,6 @@
                     <p class="text-4xl font-bold">What We Offer for You</p>
                 </div>
                 <ServicesCarousel :services="services" />
-                <div>
-                    <div></div>
-                    <div></div>
-                </div>
             </div>
         </Section>
         </div>
@@ -33,11 +29,16 @@
                     <h2 class="font-bold text-center mb-2" >Shop with Us</h2>
                     <p class="text-4xl font-bold text-center">Featured Products</p>
                 </div>
+                <button @click="addtocart(1,1)">Test</button>
                 <div class="grid grid-cols-4 gap-4">
-                    <ProductCard v-for="(item, index) in featuredProducts" :key=index :product="item" />
+                    <ProductCard v-for="(item, index) in featuredProducts" :key=index :product="item" :addtocart="addtocart"/>
                 </div>
             </div>
         </Section>
+        <div>
+            <!-- <span v-if="$page.props.car">cart</span> -->
+        </div>
+
     </ClientLayout>
 </template>
 
@@ -46,6 +47,7 @@ import ClientLayout from '@/Layouts/ClientLayout.vue';
 import Section from '@/Components/Client/Section.vue';
 import ServicesCarousel from '@/Components/Client/ServicesCarousel.vue';
 import ProductCard from '@/Components/Client/ProductCard.vue';
+import { router } from '@inertiajs/vue3';
 import { onMounted } from 'vue';
 
 const props = defineProps <{
@@ -55,6 +57,11 @@ const props = defineProps <{
 onMounted(() => {
     console.log(props.featuredProducts)
 })
+
+const addtocart = (id: number, quantity: number) => {
+    router.post('/cart/add', {product_id: id, quantity: quantity})
+    console.log(id)
+}
 const services = [
     {
         name: 'IT Consulting',

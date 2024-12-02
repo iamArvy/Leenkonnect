@@ -1,7 +1,8 @@
 <template>
     <Head :title="title" />
+    <Cart v-if="isCartOpen" :items="$page.props.cart" :closeCart="closeCart"/>
     <div class="flex flex-col min-h-screen">
-        <header class="bg-white text-black p-4 sticky w-full top-0 z-50">
+        <header class="bg-white text-black p-4 sticky w-full top-0 z-10">
             <section class="max-w-screen-xl mx-auto flex justify-between items-center">
                 <h1 class="text-xl text-uppercase">Leenkonnect</h1>
                 <nav class="flex gap-5 text-lg items-center">
@@ -23,7 +24,10 @@
                 </nav>
                 <SearchBar />
                 <div class="user-options flex flex-row gap-3" >
-                    <Link :href="route('cart.index')"><i class="bx bx-cart-alt"></i></Link>
+                    <button @click="openCart()">
+                        <!-- <i class="bx bx-cart-alt"></i> -->
+
+<box-icon name="rocket"></box-icon></button>
                     <Link :href="route('home')"><i class="bx bx-user-circle "></i></Link>
                 </div>
             </section>
@@ -68,6 +72,8 @@
 import { route } from '../../../vendor/tightenco/ziggy/src/js';
 // @ts-ignore
 import Button from '@/Components/Client/Button.vue';
+import { ref } from 'vue';
+import Cart from '@/Components/Client/Cart.vue';
 // import Button from '@/Components/Client/Button.vue';
 
 // import { title } from 'process';
@@ -75,6 +81,18 @@ defineProps<{
     title: string
 }>()
 
+// import { usePage } from '@inertiajs/vue3';
+
+// const { props } = usePage();
+// const cart = props.cart;
+
+const isCartOpen = ref(false);
+const openCart = () => {
+    isCartOpen.value = true;
+}
+const closeCart = () => {
+    isCartOpen.value = false;
+}
 const footerNavs = [
     {
         title: 'About',

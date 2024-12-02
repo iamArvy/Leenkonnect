@@ -10,26 +10,21 @@ class CartController extends Controller
     protected $cartService;
     public function __construct()
     {
-        $this->cartService = new \App\Services\Client\CartService();
-    }
-    public function index()
-    {
-        $cart = session()->get('cart', []);
-        return back()->with('cart', compact('cart'));
+        $this->cartService = new \App\Services\CartService();
     }
 
-    public function add()
+    public function add(Request $request)
     {
-        $cart = session()->get('cart', []);
-        $cart[$product->id] = [
-            'id' => $product->id,
-            'name' => $product->name,
-            'image' => $product->image,
-            'price' => $product->price,
-            'quantity' => $quantity,
-        ];
-        session()->put('cart', $cart);
-        return back()->with('success', 'Product added to cart successfully!');
+        dd('here');
+        $id = $request->id;
+        $quantity = $request->quantity;
+        try{
+            $this->cartService->add($id, $quantity);
+            dd($this->cartService->getCart());
+            return back()->with('success', 'Product added to cart successfully!');
+        }catch(Exception $e){
+            return back()->with('error', $e->getMessage());
+        }
     }
 
     public function update(Request $request)

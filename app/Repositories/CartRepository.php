@@ -1,37 +1,66 @@
 <?php
 namespace App\Repositories;
-
-use App\Models\Cart;
 use App\Models\Product;
 
 class CartRepository
 {
-    public function addProduct($userId, $productId, $quantity)
+    protected $cart;
+
+    public function __construct()
     {
-        return Cart::create([
-            'user_id' => $userId,
-            'product_id' => $productId,
-            'quantity' => $quantity
-        ]);
+        $this->cart = session()->get('cart', []);
     }
 
-    public function updateQuantity($userId, $productId, $quantity)
+    public function all()
     {
-        $cart = Cart::where('user_id', $userId)->where('product_id', $productId)->first();
-        if ($cart) {
-            $cart->update(['quantity' => $quantity]);
+        $productIds = array_column($this->cart, 'id');
+        $products = Product::whereIn('id', $productIds)->get(['id', 'name', 'image', 'price']);
+         // Map over products and add quantity and total
+        $items = collect($this->cart)->map(function ($cartItem) use ($products) {
+            $product = $products->firstWhere('id', $cartItem['id']); // Find corresponding product
+            if ($product) {
+                $product->quantity = $cartItem['quantity'];
+                $product->total = $product->price * $product->quantity;
+                return $product->toArray(); // Convert to array
+            }
+        });
+
+        // Remove any null values and return as an array
+        return $items->filter()->values()->toArray();
+    }
+
+    public function create($id, $quantity)
+    {
+        $this->cart[$id] = [
+            'id' => $id,
+            'quantity' => $quantity,
+        ];
+        return session()->put('cart', $this->cart);
+    }
+    public function checkIfProductExists($id)
+    {
+        if (!isset($this->cart[$id])) {
+            return false;
         }
-        return $cart;
+        return true;
     }
 
-    public function transferCart($guestSessionId, $userId)
+    public function changeQuantity($id, $quantity)
     {
-        // Transfer all guest cart items to the user's cart
-        return Cart::where('session_id', $guestSessionId)->update(['user_id' => $userId]);
+        $this->cart[$id] = [
+            'quantity' => $quantity,
+        ];
+        return session()->put('cart', $this->cart);
     }
 
-    public function getUserCart($userId)
+    public function delete($id)
     {
-        return Cart::where('user_id', $userId)->get();
+        unset($this->cart[$id]);
+        return session()->put('cart', $this->cart);
+    }
+
+    public function clear()
+    {
+        session()->forget('cart');
     }
 }
