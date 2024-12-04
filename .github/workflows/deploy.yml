@@ -51,6 +51,8 @@ jobs:
         run: |
           php artisan config:clear
           php artisan route:clear
+          php artisan migrate
+          php artisan db:seed --class=DatabaseSeeeder
 
       # Set permissions
       - name: Set Directory Permissions
