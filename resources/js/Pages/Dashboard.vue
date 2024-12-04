@@ -1,6 +1,6 @@
 <script setup>
-import AppLayout from '@/Layouts/AppLayout.vue';
-import Welcome from '@/Components/JS/Welcome.vue';
+import AppLayout from '@/Layouts/AdminLayout.vue';
+import Welcome from '@/Components/Admin/Welcome.vue';
 </script>
 
 <template>

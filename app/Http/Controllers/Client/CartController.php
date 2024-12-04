@@ -4,23 +4,21 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Services\CartService;
 class CartController extends Controller
 {
     protected $cartService;
-    public function __construct()
+    public function __construct(CartService $cartService)
     {
-        $this->cartService = new \App\Services\CartService();
+        $this->cartService = $cartService;
     }
 
     public function add(Request $request)
     {
-        dd('here');
         $id = $request->id;
         $quantity = $request->quantity;
         try{
             $this->cartService->add($id, $quantity);
-            dd($this->cartService->getCart());
             return back()->with('success', 'Product added to cart successfully!');
         }catch(Exception $e){
             return back()->with('error', $e->getMessage());

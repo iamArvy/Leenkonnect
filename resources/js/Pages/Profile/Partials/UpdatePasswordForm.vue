@@ -1,12 +1,12 @@
 <script setup>
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
-import ActionMessage from '@/Components/JS/ActionMessage.vue';
-import FormSection from '@/Components/JS/FormSection.vue';
-import InputError from '@/Components/JS/InputError.vue';
-import InputLabel from '@/Components/JS/InputLabel.vue';
-import PrimaryButton from '@/Components/JS/PrimaryButton.vue';
-import TextInput from '@/Components/JS/TextInput.vue';
+import ActionMessage from '@/Components/Admin/ActionMessage.vue';
+import FormSection from '@/Components/Admin/FormSection.vue';
+import InputError from '@/Components/Admin/InputError.vue';
+import InputLabel from '@/Components/Admin/InputLabel.vue';
+import PrimaryButton from '@/Components/Admin/PrimaryButton.vue';
+import TextInput from '@/Components/Admin/TextInput.vue';
 
 const passwordInput = ref(null);
 const currentPasswordInput = ref(null);

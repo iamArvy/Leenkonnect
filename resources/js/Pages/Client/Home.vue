@@ -1,13 +1,13 @@
 <template>
     <ClientLayout title="Home">
-        <Section>
-            <div class="flex flex-row justify-end relative">
-                <div class="rounded-tr-[50px] self-center h-[70%] bg-white p-10 absolute w-[50%] z-2 left-0 flex flex-col gap-4">
-                    <h1 class="font-bold text-5xl text-primary">Lorem ipsum dolor sit amet consectetur.</h1>
+        <Section class="w-svw px-0 sm:px-3">
+            <div class="flex flex-col-reverse sm:flex-row md:justify-end md:relative">
+                <div class="lg:rounded-tr-[50px] lg:self-center lg:h-[70%] bg-white p-3 lg:p-10 lg:absolute sm:w-[50%] lg:z-2 left-0 flex flex-col gap-4">
+                    <h1 class="font-bold text-4xl sm:3xl lg:text-5xl text-primary">Lorem ipsum dolor sit amet consectetur.</h1>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto delectus, enim officia minima nam ea omnis quam sunt veniam nostrum.</p>
                     <button class="py-2 px-4 bg-primary text-white rounded-lg w-fit">Get Started</button>
                 </div>
-                <figure class="w-[70%] max-h-[480px] overflow-hidden rounded-bl-[50px]">
+                <figure class="w-svw sm:w-[50%] lg:w-[70%] md:max-h-[480px] overflow-hidden rounded-bl-[50px]">
                     <img src="/images/homehero.png" alt="hero">
                 </figure>
             </div>
@@ -16,8 +16,8 @@
             <Section >
             <div class="flex flex-col gap-4 py-12 ">
                 <div>
-                    <h2 class="text-lg">Our Services</h2>
-                    <p class="text-4xl font-bold">What We Offer for You</p>
+                    <h2 class="text-md md:text-lg">Our Services</h2>
+                    <p class=" text-2xl md:text-4xl font-bold">What We Offer for You</p>
                 </div>
                 <ServicesCarousel :services="services" />
             </div>
@@ -26,19 +26,14 @@
         <Section>
             <div class="flex flex-col gap-4 py-12">
                 <div>
-                    <h2 class="font-bold text-center mb-2" >Shop with Us</h2>
-                    <p class="text-4xl font-bold text-center">Featured Products</p>
+                    <h2 class="font-semibold text-center mb-2" >Shop with Us</h2>
+                    <p class="text-2xl md:text-4xl font-bold text-center">Featured Products</p>
                 </div>
-                <button @click="addtocart(1,1)">Test</button>
-                <div class="grid grid-cols-4 gap-4">
-                    <ProductCard v-for="(item, index) in featuredProducts" :key=index :product="item" :addtocart="addtocart"/>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <ProductCard v-for="(item, index) in featuredProducts" :key=index :product="item" />
                 </div>
             </div>
         </Section>
-        <div>
-            <!-- <span v-if="$page.props.car">cart</span> -->
-        </div>
-
     </ClientLayout>
 </template>
 
@@ -57,11 +52,6 @@ const props = defineProps <{
 onMounted(() => {
     console.log(props.featuredProducts)
 })
-
-const addtocart = (id: number, quantity: number) => {
-    router.post('/cart/add', {product_id: id, quantity: quantity})
-    console.log(id)
-}
 const services = [
     {
         name: 'IT Consulting',

@@ -55,6 +55,54 @@ class Product extends Model
         $this->attributes['tags'] = json_encode(array_map('strtolower', (array) $value));
     }
 
+    public function reviews() {
+        return $this->hasMany(Review::class);
+    }
+
+    // Custom attributes (Accessors)
+    public function getRatingWithReviewsCountAttribute()
+    {
+        $rating = $this->reviews()->avg('rating');
+        $reviewsCount = $this->reviews()->count();
+        return ['rating' => $rating, 'reviews_count' => $reviewsCount];
+    }
+
+    // Mutators for Images Attribute (JSON to array and vice versa)
+    // public function getGalleryAttribute($value)
+    // {
+    //     return json_decode($value, true); // Decode JSON string to array
+    // }
+
+    // public function getFeaturesAttribute($value)
+    // {
+    //     return json_decode($value, true); // Decode JSON string to array
+    // }
+
+    // public function getTagsAttribute($value)
+    // {
+    //     return json_decode($value, true); // Decode JSON string to array
+    // }
+
+    public function getRatingsAttribute()
+    {
+        return $this->reviews()->avg('rating');
+    }
+    // public function setGalleryAttribute($value)
+    // {
+    //     $this->attributes['gallery'] = json_encode($value); // Encode array to JSON string
+    // }
+    // Helper method to get sales quantity
+    public function getSalesAttribute()
+    {
+        return $this->orders()->sum('quantity');
+    }
+
+    // Orders count (using relation)
+    public function getOrdersCountAttribute()
+    {
+        return $this->orders()->count();
+    }
+
     // Example of a custom scope (optional)
     public function scopeInStock($query)
     {
@@ -79,10 +127,6 @@ class Product extends Model
 
     public function category() {
         return $this->belongsTo(Category::class);
-    }
-
-    public function reviews() {
-        return $this->hasMany(Review::class);
     }
 
     public function reduceStock($quantity)

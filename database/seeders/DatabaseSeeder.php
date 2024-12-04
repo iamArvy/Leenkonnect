@@ -16,6 +16,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $role = Role::findOrCreate('superuser');
+        $newpermissions = ['create users', 'assign users', 'view dashboard'];
+
+        foreach ($newpermissions as $permission) {
+            Permission::findOrCreate($permission);
+        }
         $permissions = Permission::all();
         $role->syncPermissions($permissions);
 

@@ -47,6 +47,22 @@ const swiperOptions = ref({
       return '<span class="' + className + '"></span>';
     },
   },
+  breakpoints: {
+    0: {
+      slidesPerView: 1,
+    },
+    640: {
+      slidesPerView: 2,
+    },
+    1024: {
+      slidesPerView: 3,
+    },
+  }
+//   on: {
+//     init: function () {
+//       console.log('swiper initialized');
+//     },
+//   }
 });
 </script>
 
