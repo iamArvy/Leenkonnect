@@ -50,9 +50,7 @@ jobs:
       - name: Clear Config and Cache
         run: |
           php artisan config:clear
-          php artisan cache:clear
           php artisan route:clear
-          php artisan optimize:clear
 
       # Set permissions
       - name: Set Directory Permissions
