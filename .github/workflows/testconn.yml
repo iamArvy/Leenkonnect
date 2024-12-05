@@ -24,6 +24,7 @@ jobs:
     - name: Test SSH Connection to Server
       run: |
         # Test SSH connection to the server
+        echo ${{vars.SERVER_USERNAME}}
         ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ vars.SERVER_USERNAME }}@198.177.120.27 "echo 'SSH Connection Successful!'"
 
     # - name: Test Git Clone from Server
@@ -35,7 +36,7 @@ jobs:
     #       cd /home/user/test-deploy
 
     #       # Clone the repository
-    #       git clone git@github.com:your-username/your-repository.git .
+    #       git clone ${{vars.GIT_ADDR}} .
 
     #       # Check if the repository was cloned successfully
     #       if [ -d ".git" ]; then
