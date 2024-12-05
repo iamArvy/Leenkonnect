@@ -1,0 +1,46 @@
+name: Test SSH Connection and Clone
+
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to the main branch
+
+jobs:
+  test-ssh-connection:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up SSH
+      run: |
+        # Set up SSH key from GitHub Secrets
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H your-server-ip >> ~/.ssh/known_hosts  # Ensure GitHub can trust the server
+
+    - name: Test SSH Connection to Server
+      run: |
+        # Test SSH connection to the server
+        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ vars.SERVER_USERNAME }}@198.177.120.27 "echo 'SSH Connection Successful!'"
+
+    # - name: Test Git Clone from Server
+    #   run: |
+    #     # Test cloning the repository on the server
+    #     ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no user@your-server-ip << 'EOF'
+    #       # Navigate to the project directory or create it
+    #       mkdir -p /home/user/test-deploy
+    #       cd /home/user/test-deploy
+
+    #       # Clone the repository
+    #       git clone git@github.com:your-username/your-repository.git .
+
+    #       # Check if the repository was cloned successfully
+    #       if [ -d ".git" ]; then
+    #         echo "Repository cloned successfully!"
+    #       else
+    #         echo "Failed to clone the repository."
+    #       fi
+    #     EOF

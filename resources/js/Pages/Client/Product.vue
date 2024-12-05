@@ -45,7 +45,7 @@ const quantity = ref(1)
     <Section class="grid grid-cols-3 gap-4">
         <ProductGallery :images="product.gallery" id="gallery" class="w-full" />
         <div class="flex flex-col gap-2 w-full col-span-2 p-2">
-            <h1 class="text-3xl">{{ product.name }}</h1>
+            <h1 class="text-3xl capitalise">{{ product.name }}</h1>
             <Ratings :rating="3.5" />
             <Price :price="product.price" />
             <p>{{ product.description }}</p>

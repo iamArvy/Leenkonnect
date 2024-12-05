@@ -34,6 +34,27 @@
                 </div>
             </div>
         </Section>
+        <div class="my-8 bg-[#1b2c61] bg-[url('/images/servicesbg.png')] text-white w-full">
+            <Section >
+                <h2>Client's Feedback</h2>
+                <p>What People Say</p>
+                <span></span>
+                <div>
+                    <TestimonialSwiper :testimonies="testimonies" />
+                </div
+            </Section>
+        </div>
+        <Section>
+            <div class="grid grid-cols-3">
+                <div>
+                    <img src="" alt="">
+                    <div>
+                        <h3></h3>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </Section>
     </ClientLayout>
 </template>
 
@@ -44,9 +65,11 @@ import ServicesCarousel from '@/Components/Client/ServicesCarousel.vue';
 import ProductCard from '@/Components/Client/ProductCard.vue';
 import { router } from '@inertiajs/vue3';
 import { onMounted } from 'vue';
+import TestimonialSwiper from './partials/TestimonialSwiper.vue';
 
 const props = defineProps <{
-    featuredProducts: Array<any>
+    featuredProducts: Array<any>,
+    testimonies: Array<any>
 }>()
 
 onMounted(() => {
