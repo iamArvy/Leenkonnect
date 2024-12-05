@@ -13,21 +13,39 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
 
+    # - name: Set up SSH
+    #   run: |
+    #     # Set up SSH key from GitHub Secrets
+    #     mkdir -p ~/.ssh
+    #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+    #     chmod 600 ~/.ssh/id_rsa
+    #     ssh-keyscan -H 198.177.120.27 >> ~/.ssh/known_hosts
+    #     echo "Worked"
+
+    # - name: Test SSH Connection to Server
+    #   run: |
+    #     # Test SSH connection to the server
+    #     echo ${{vars.SERVER_USERNAME}}
+    #     ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ vars.SERVER_USERNAME }}@198.177.120.27 "echo 'SSH Connection Successful!'"
+
     - name: Set up SSH
       run: |
+        # Enable debugging
+        set -x
+
         # Set up SSH key from GitHub Secrets
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H 198.177.120.27 >> ~/.ssh/known_hosts  # Ensure GitHub can trust the server
-        echo "Worked"
 
-    - name: Test SSH Connection to Server
-      run: |
-        # Test SSH connection to the server
-        echo ${{vars.SERVER_USERNAME}}
-        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ vars.SERVER_USERNAME }}@198.177.120.27 "echo 'SSH Connection Successful!'"
+        # Add the server's IP to known hosts to avoid host verification errors
+        ssh-keyscan -H 198.177.120.27 >> ~/.ssh/known_hosts
 
+        # Test SSH connection
+        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{vars.SERVER_USERNAME}}@198.177.120.27 "echo 'SSH Connection Successful!'"
+
+        # If we reach this point, SSH is working
+        echo "SSH connection is successful"
     # - name: Test Git Clone from Server
     #   run: |
     #     # Test cloning the repository on the server
