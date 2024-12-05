@@ -12,7 +12,7 @@
 
     <ul>
         <li><strong>Name:</strong> {{ $user['name'] }}</li>
-        <li><strong>Email:</strong> {{ $user['email'] }}</li>
+        <li><strong>Subject:</strong> {{ $user['subject'] }}</li>
         <li><strong>Message:</strong> {{ $user['message'] }}</li>
     </ul>
 
@@ -23,7 +23,7 @@
     <p>Best regards,</p>
     <p><strong>Your Company Name</strong></p>
     <p>
-        <a href="https://example.com">Visit our website</a> |
+        <a href="https://api.leenovative.com">Visit our website</a> |
         <a href="mailto:support@leenkonnect.com">Contact Support</a>
     </p>
 </body>

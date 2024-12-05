@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ContactAcknowledgment extends Mailable
+class AcknowledgmentMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -26,7 +26,8 @@ class ContactAcknowledgment extends Mailable
     {
         return new Envelope(
             subject: 'We’ve Received Your Message',
-            from: [env('MAIL_FROM_ADDRESS') => config('app.name')],
+            from: env('MAIL_FROM_ADDRESS'),
+            to: $this->userData['email']
         );
     }
 

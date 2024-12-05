@@ -6,13 +6,13 @@
     <title>Contact Form Submission</title>
 </head>
 <body>
-    <p>Hello Admin,</p>
+    <p>Hello Support,</p>
 
     <p>You have received a new message through the contact form. Below are the details:</p>
 
     <ul>
         <li><strong>Name:</strong> {{ $data['name'] }}</li>
-        <li><strong>Email:</strong> {{ $data['email'] }}</li>
+        <li><strong>Subject:</strong> {{ $data['subject'] }}</li>
         <li><strong>Message:</strong> {{ $data['message'] }}</li>
     </ul>
 

@@ -8,15 +8,15 @@ use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ContactFormMail extends Mailable
+class ContactAcknowledgmentMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $contactData;
+    public $userData;
 
-    public function __construct($contactData)
+    public function __construct($userData)
     {
-        $this->contactData = $contactData;
+        $this->userData = $userData;
     }
 
     /**
@@ -24,12 +24,10 @@ class ContactFormMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        // dd($this->contactData['email']);
-
         return new Envelope(
-            subject: $this->contactData['subject'],
-            from: $this->contactData['email'], // App email from .env
-            to: [env('MAIL_FROM_ADDRESS')] // Admin email from .env
+            subject: 'We’ve Received Your Message',
+            from: env('MAIL_FROM_ADDRESS'),
+            to: $this->userData['email']
         );
     }
 
@@ -39,8 +37,8 @@ class ContactFormMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.contact-form',
-            with: ['data' => $this->contactData]
+            view: 'emails.contact-acknowledgment',
+            with: ['user' => $this->userData]
         );
     }
 

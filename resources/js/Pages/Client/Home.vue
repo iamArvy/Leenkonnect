@@ -117,11 +117,11 @@
                     </div>
                     <div class="col-span-6 sm:col-span-4">
                         <TextInput
-                            id="contact_name"
+                            id="contact_email"
                             v-model="contactform.email"
                             type="email"
                             class="mt-1 block w-full"
-                            autocomplete="name"
+                            autocomplete="email"
                             placeholder="Email Address"
                         />
                         <InputError
@@ -131,11 +131,11 @@
                     </div>
                     <div class="col-span-6 sm:col-span-4">
                         <TextInput
-                            id="contact_name"
+                            id="contact_subject"
                             v-model="contactform.subject"
                             type="text"
                             class="mt-1 block w-full"
-                            autocomplete="name"
+                            autocomplete="subject"
                             required
                             placeholder="Subject"
                         />
