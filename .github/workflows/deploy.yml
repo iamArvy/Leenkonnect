@@ -27,10 +27,10 @@ jobs:
           echo "DB_DATABASE=${{ vars.DB_DATABASE }}" >> .env
           echo "DB_USERNAME=${{ vars.DB_USERNAME }}" >> .env
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-          echo "MAIL_FROM_ADDRESS=${{vars.MAIL_FROM_ADDRESS}}" >> .env
+          echo "MAIL_FROM_ADDRESS=${{vars.MAIL_USERNAME}}" >> .env
           echo "MAIL_HOST=${{vars.MAIL_HOST}}" >> .env
           echo "MAIL_USERNAME=${{vars.MAIL_USERNAME}}" >> .env
-          echo "MAIL_PASSWORD= ${{secrets.MAIL_PASSWORD}}"
+          echo "MAIL_PASSWORD= ${{secrets.MAIL_PASSWORD}}" >> .env
           echo "SUPERUSER_EMAIL= ${{vars.SUPERUSER_EMAIL}}" >> .env
           echo "SUPERUSER_PASSWORD=${{secrets.SUPERUSER_PASSWORD}}" >> .env
 
