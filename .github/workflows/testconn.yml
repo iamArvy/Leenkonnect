@@ -19,7 +19,7 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H your-server-ip >> ~/.ssh/known_hosts  # Ensure GitHub can trust the server
+        ssh-keyscan -H 198.177.120.27 >> ~/.ssh/known_hosts  # Ensure GitHub can trust the server
 
     # - name: Test SSH Connection to Server
     #   run: |
