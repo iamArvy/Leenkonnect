@@ -23,7 +23,7 @@
                     </li>
                 </ul>
             </nav> -->
-            <div class="col-span-3 grid grid-cols-2 gap-4 text-base">
+            <div class="col-span-3 flex flex-col md:grid grid-cols-2 gap-4 text-base">
                 <nav class="">
                     <h3 class="text-lg font-satoshi font-medium h-10 text-white" >Contacts</h3>
                     <ul class="flex flex-col gap-3">
@@ -41,10 +41,10 @@
                     </ul>
                 </nav>
             </div>
-            
+
         </section>
     <div class="w-full mx-auto text-center bg-black p-4">
-        <p class="text-gray-500">Copyright &copy; 2024 Leenkonnect. All rights reserved.</p>
+        <p class="text-gray-500 text-sm">Copyright &copy; 2024 Leenkonnect. All rights reserved.</p>
     </div>
     </footer>
 </template>
@@ -99,7 +99,7 @@ const services = [
 ]
 const contactnavs = [
 
-    {       
+    {
         name: 'Address',
         value: '1 awe street ogba ifako ijaye, Lagos, Nigeria'
     },

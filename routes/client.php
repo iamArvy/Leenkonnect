@@ -7,6 +7,7 @@ Route::namespace(App\Http\Controllers\Client::class)->group(function () {
     Route::get('/contact', 'PagesController@contact')->name('contact');
     Route::get('/faq', 'PagesController@faq')->name('faq');
     Route::get('/services', 'PagesController@services')->name('services');
+
     Route::group([
         'as'=>'cart.',
         'prefix'=>'/cart'
@@ -24,6 +25,14 @@ Route::namespace(App\Http\Controllers\Client::class)->group(function () {
     ], function () {
         Route::get('/', 'ShopController@index')->name('index');
         Route::get('/catalog/{category}', 'ShopController@catalog')->name('catalog');
+    });
+
+    Route::group([
+        'as'=>'contact.',
+        'prefix'=>'/contact'
+    ], function () {
+        Route::get('/contact', 'ContactController@index')->name('index');
+        Route::post('/contact/store', 'ContactController@store')->name('store');
     });
 
     // Checkout

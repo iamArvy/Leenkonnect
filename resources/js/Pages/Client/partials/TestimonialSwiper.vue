@@ -1,19 +1,22 @@
 <template>
     <div>
        <!-- @vue-ignore -->
-       <!-- <swiper v-bind="swiperOptions">
-           <swiper-slide v-for="(service, index) in testimonials" :key="index">
-            <div>
-                <h3>{{ testimony.caption }}</h3>
+       <swiper v-bind="swiperOptions">
+           <swiper-slide v-for="(item, index) in testimonials" :key="index">
+            <div class="grid grid-row-2 gap-8">
+                <div class="m-b-4 flex flex-col gap-2">
+                    <h3 class="text-xl font-semibold">{{ item.caption }}</h3>
+                    <p>{{ item.content }}</p>
+                </div>
+                <div class="flex flex-col gap-2 items-center">
+                    <img :src="item.image" alt="" width="100" height="100" class="rounded-full size-20 object-cover">
+                    <h3 class="text-xl font-semibold">{{ item.name }}</h3>
+                    <p>{{ item.occupation }}</p>
+                </div>
             </div>
-               <div class="flex flex-col gap-4 border p-8 rounded-md min-h-[300px]">
-                   <div></div>
-                   <h3 class="text-xl font-bold">{{ service.name }}</h3>
-                   <p>{{ service.description }}</p>
-               </div>
            </swiper-slide>
 
-       </swiper> -->
+       </swiper>
        <div class="my-pagination"></div>
 
     </div>
@@ -21,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -33,32 +36,26 @@ const modules = [Pagination];
 const props = defineProps<{
  testimonials: {
    name: string;
-   description: string;
+   content: string;
    image: string;
+   occupation: string;
+   caption: string;
  }[];
 }>();
 
+onMounted(()=>{
+    console.log(props.testimonials)
+})
 // Swiper options
 const swiperOptions = ref({
  modules,
  spaceBetween: 10,
- slidesPerView: 3,
+ slidesPerView: 1,
  pagination: {
    el: '.my-pagination', // Attach pagination element
    clickable: true,
    renderBullet: function (index: number, className: string) {
      return '<span class="' + className + '"></span>';
-   },
- },
- breakpoints: {
-   0: {
-     slidesPerView: 1,
-   },
-   640: {
-     slidesPerView: 2,
-   },
-   1024: {
-     slidesPerView: 3,
    },
  }
 //   on: {

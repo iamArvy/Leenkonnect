@@ -10,11 +10,10 @@ class ContactMessage extends Model
     use HasFactory;
 
     protected $fillable = [
-        'session_id',
         'email',
         'name',
         'subject',
-        'content',
+        'message',
     ];
 
     // Define the relationship with the Session model

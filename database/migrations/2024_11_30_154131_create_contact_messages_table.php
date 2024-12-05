@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('contact_messages', function (Blueprint $table) {
             $table->id();
             $table->string('session_id');
-            $table->foreign('session_id')->references('id')->on('sessions')->onDelete('cascade');            $table->string('email');
+            $table->foreign('session_id')->references('id')->on('sessions')->onDelete('cascade');
+            $table->string('email');
             $table->string('name');
             $table->string('subject');
             $table->json('content');
