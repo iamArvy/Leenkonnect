@@ -40,8 +40,8 @@
                 <p>What People Say</p>
                 <span></span>
                 <div>
-                    <TestimonialSwiper :testimonies="testimonies" />
-                </div
+                    <!-- <TestimonialSwiper :testimonies="testimonies" /> -->
+                </div>
             </Section>
         </div>
         <Section>

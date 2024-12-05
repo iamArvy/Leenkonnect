@@ -1,7 +1,7 @@
 <template>
     <div>
        <!-- @vue-ignore -->
-       <swiper v-bind="swiperOptions">
+       <!-- <swiper v-bind="swiperOptions">
            <swiper-slide v-for="(service, index) in testimonials" :key="index">
             <div>
                 <h3>{{ testimony.caption }}</h3>
@@ -13,7 +13,7 @@
                </div>
            </swiper-slide>
 
-       </swiper>
+       </swiper> -->
        <div class="my-pagination"></div>
 
     </div>
