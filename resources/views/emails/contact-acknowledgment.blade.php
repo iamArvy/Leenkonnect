@@ -16,7 +16,7 @@
         <li><strong>Message:</strong> {{ $user['message'] }}</li>
     </ul>
 
-    <p>Our team is working hard to address your inquiry, and you can expect a response within 24-48 hours. If your matter is urgent, please reply to this email or contact us at <a href="mailto:support@example.com">support@example.com</a>.</p>
+    <p>Our team is working hard to address your inquiry, and you can expect a response within 24-48 hours. If your matter is urgent, please reply to this email or contact us at <a href="mailto:admin@leenovative.com">admin@leenovative.com</a>.</p>
 
     <p>Thank you for your patience and trust in us.</p>
 
@@ -24,7 +24,7 @@
     <p><strong>Your Company Name</strong></p>
     <p>
         <a href="https://api.leenovative.com">Visit our website</a> |
-        <a href="mailto:support@leenkonnect.com">Contact Support</a>
+        <a href="mailto:admin@leenovative.com">Contact Support</a>
     </p>
 </body>
 </html>
