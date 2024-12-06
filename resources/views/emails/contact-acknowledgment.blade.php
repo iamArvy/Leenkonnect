@@ -21,7 +21,7 @@
     <p>Thank you for your patience and trust in us.</p>
 
     <p>Best regards,</p>
-    <p><strong>Your Company Name</strong></p>
+    <p><strong>{{config('app.name')}}</strong></p>
     <p>
         <a href="https://api.leenovative.com">Visit our website</a> |
         <a href="mailto:admin@leenovative.com">Contact Support</a>
