@@ -28,8 +28,9 @@ class ContactFormMail extends Mailable
 
         return new Envelope(
             subject: $this->contactData['subject'],
-            from: $this->contactData['email'], // App email from .env
-            to: [env('MAIL_FROM_ADDRESS')] // Admin email from .env
+            from: env('MAIL_FROM_ADDRESS'), // App email from .env
+            to: [env('MAIL_FROM_ADDRESS')], // Admin email from .env
+            replyTo: $this->contactData['email']
         );
     }
 
