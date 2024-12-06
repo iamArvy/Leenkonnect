@@ -31,7 +31,6 @@ jobs:
           echo "MAIL_PASSWORD= ${{secrets.MAIL_PASSWORD}}" >> .env
           echo "SUPERUSER_EMAIL= ${{vars.SUPERUSER_EMAIL}}" >> .env
           echo "SUPERUSER_PASSWORD=${{secrets.SUPERUSER_PASSWORD}}" >> .env
-
       # Install dependencies
       - name: Install Dependencies
         run: |
@@ -40,6 +39,7 @@ jobs:
       # Clear cache and optimize
       - name: Clear Config and Cache
         run: |
+          php artisan key:generate
           php artisan config:clear
           php artisan route:clear
       # Set permissions
