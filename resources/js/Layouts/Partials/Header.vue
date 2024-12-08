@@ -8,16 +8,11 @@
                     <Link :href="route('home')" class="text-xl text-uppercase cursor-pointer">Leenkonnect</Link>
                 </div>
                 <nav class="hidden lg:flex gap-10 text-lg items-center justify-center flex-grow">
-                    <div id="shop-list" class="group relative cursor-pointer">
-                        <div class="flex items-center"><span>Company</span><i class="bx bx-chevron-down"></i></div>
-                        <ul class="hidden group-hover:block absolute w-auto p-2 bg-blue-500">
-                            <li><Link :href="route('about')">About</Link></li>
-                            <li><Link :href="route('services')">Services</Link></li>
-                        </ul>
-                    </div>
                     <Link :href="route('shop.index')">Shop</Link>
-                    <Link :href="route('home')">Blog</Link>
-                    <Link :href="route('home')">Contact</Link>
+                    <Link :href="route('services')">Services</Link>
+                    <Link :href="route('about')">About</Link>
+                    <Link :href="route('contact.index')">Contact</Link>
+                    <Link :href="route('blog.index')">Blog</Link>
                 </nav>
                 <SearchBar />
                 <div class="user-options flex flex-row gap-3" >
@@ -34,10 +29,10 @@
                         </ResponsiveNavLink>
                     </div>
 
-                    
+
                 </div>
             </section>
-            
+
         </header>
 </template>
 

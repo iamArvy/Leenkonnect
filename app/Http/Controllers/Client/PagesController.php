@@ -15,4 +15,19 @@ class PagesController extends Controller
         $testimonials = Testimonial::latest()->limit(9)->get();
         return Inertia::render('Client/Home',['featuredProducts'=>$featuredProducts, 'testimonials' => $testimonials]);
     }
+
+    public function services()
+    {
+        return Inertia::render('Client/Services');
+    }
+
+    public function about()
+    {
+        return Inertia::render('Client/About');
+    }
+
+    public function contact()
+    {
+        return Inertia::render('Client/Contact');
+    }
 }

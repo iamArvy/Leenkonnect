@@ -13,7 +13,7 @@ class ContactController extends Controller
 {
     public function index()
     {
-        return view('client.contact.index');
+        return inertia('Client/Contact');
     }
 
     public function store(ContactRequest $request)
