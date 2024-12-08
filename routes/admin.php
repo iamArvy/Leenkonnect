@@ -9,8 +9,11 @@ Route::group([
     'prefix'=>'/admin'
 ], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-    Route::get('/products', 'ProductController@index')->name('products');
-    Route::resource('products', ProductController::class);
+    // Route::get('/products', 'ProductController@index')->name('products');
+    Route::resource('/products', ProductController::class);
+    Route::post('/products/gallery/delete/{product}', 'ProductController@deleteGalleryImage')->name('products.gallery.delete');
+    Route::post('/products/gallery/add/{product}', 'ProductController@addGalleryImage')->name('products.gallery.add');
+    Route::resource('brands', BrandController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('customers', CustomerController::class);
     Route::resource('orders', OrderController::class);

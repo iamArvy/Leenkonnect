@@ -6,8 +6,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Brand;
+use App\Http\Requests\ProductRequest;
+
+
 class ProductController extends Controller
 {
     protected $productService;
@@ -17,51 +24,106 @@ class ProductController extends Controller
         $this->productService = $productService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(12);
-        // dd($products);
+        $search = $request->input('search');
+        $category = $request->input('category');
+        $brand = $request->input('brand');
+        // $priceRange = $request->input('price_range'); // example: "0-100"
+
+        // Start the query
+        $query = Product::latest();
+
+        // Apply search filter
+        if ($search) {
+            $query->where('name', 'LIKE', "%{$search}%")
+                ->orWhere('description', 'LIKE', "%{$search}%");
+        }
+
+        // Apply category filter
+        if ($category) {
+            $query->where('category_id', $category);
+        }
+
+        if($brand){
+            $query->where('brand_id', $brand);
+        }
+
+        // Apply price range filter
+        // if ($priceRange) {
+        //     [$minPrice, $maxPrice] = explode('-', $priceRange);
+        //     $query->whereBetween('price', [(float)$minPrice, (float)$maxPrice]);
+        // }
+
+        // Get paginated results
+        $categories = Category::all();
+        $brands = Brand::all();
+        $products = $query->paginate(12)->withQueryString(); // Ensure query string persists
         return inertia('Admin/Products', [
             'title' => 'Products',
-            'products'=> $products
+            'categories'=> $categories,
+            'brands' => $brands,
+            'products'=> $products,
+            'filters' => $request->only(['search', 'category', 'brand']),
         ]);
     }
 
-    public function show($slug)
-    {
-        $id = $request->product;
-        try {
-            $product = $this->productService->getProduct();
-            $data = [
-                'title' => 'Product',
-                'product'=> $product
-            ];
-            return $this->render('Emporium/Product', $product);
-        } catch (\Exception $e) {
-            return redirect()->route('error', ['code' => 404, 'message' => 'Product Not Found']);
-        }
-
-    }
-
-    public function create(CreateProductRequest $request)
+    public function store(ProductRequest $request)
     {
         try {
             $validated = $request->validated();
-            $validated['images'] = $request->hasFile('images') ? $this->productService->uploadImage($request->hasFile('images')) : null;
-            $product = $this->productService->create($this>store, $validated);
-            return redirect()->back()->with('success', 'Product added successfully');
+        // dd($validated);
+        $validated['image'] = $request->hasFile('image') ? $this->productService->storeImage($request->file('image')) : null;
+        $validated['gallery'] = $request->hasFile('gallery') ? $this->productService->storeGallery($request->file('gallery')) : null;
+        $product = Product::create($validated);
+        dd($product);
+        return redirect()->back()->with('success', 'Product created successfully.');
         } catch (\Exception $e) {
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Something went wrong');
         }
     }
 
-    public function createVariants(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, $id)
     {
-        $validated = $request->validated();
-        foreach ($validated['variants'] as $item){
-            $variant = $product->variants()->create($item);
+        try {
+            $product = Product::findOrFail($id);
+            $validated = $request->validated();
+            $validated['image'] = $request->hasFile('image') ? $this->productService->updateImage($request->hasFile('image'), $product->image) : $product->image;
+            $product->update($validated);
+            return redirect()->back()->with('success', 'Product updated successfully.');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong');
         }
-        // $variant = $product->variants()->create($validated);
+    }
+
+    public function destroy(Product $product)
+    {
+        $this->productService->deleteImage($product->image);
+        $this->productService->deleteGallery($product->gallery);
+        $product->delete();
+        return redirect()->back()->with('success', 'Product deleted successfully.');
+    }
+
+    public function addGalleryImage(Request $request, Product $product)
+    {
+        $currentGallery = $product->gallery;
+        $gallery = $this->productService->addToGallery($request->file('image'), $currentGallery);
+        $product->update(['gallery' => $gallery]);
+        return back()->with('success', 'Image added successfully.');
+    }
+
+    public function deleteGalleryImage(Request $request, Product $product)
+    {
+        $currentGallery = $product->gallery;
+        try {
+            $gallery = $this->productService->removeFromGallery($request->image, $currentGallery);
+            $product->update(['gallery' => $gallery]);
+            return back()->with('success', 'Image deleted successfully.');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
 
     }
 }

@@ -6,13 +6,27 @@ use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Generator as Faker;
 use App\Models\Category;
-
+use App\Models\Brand;
 class ProductFactory extends Factory
 {
     protected $model = Product::class;
 
     public function definition()
     {
+        $features = [
+            [
+                'name' => $this->faker->word(),
+                'value' => $this->faker->word(),
+            ],
+            [
+                'name' => $this->faker->word(),
+                'value' => $this->faker->word(),
+            ],
+            [
+                'name' => $this->faker->word(),
+                'value' => $this->faker->word(),
+            ],
+        ];
         return [
             'sku' => $this->faker->unique()->bothify('???-#####'),  // Unique SKU
             'name' => $this->faker->word() . ' ' . $this->faker->word(),  // Random product name
@@ -22,13 +36,9 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomFloat(2, 10, 1000),  // Random price between 10 and 1000
             'gallery' => [$this->faker->imageUrl(800, 600), $this->faker->imageUrl(800, 600)],  // Random gallery URLs in JSON
             'stock' => $this->faker->numberBetween(0, 100),  // Random stock number
-            'model' => $this->faker->word(),  // Random model
-            'brand' => $this->faker->company(),  // Random brand name
-            'features' =>[
-                'feature_1' => $this->faker->word(),
-                'feature_2' => $this->faker->word(),
-                'feature_3' => $this->faker->word()
-            ],  // Random features in JSON
+            'model' => $this->faker->word(),
+            'brand_id' => Brand::factory(),
+            'features' => $features,
             'tags' =>[$this->faker->word(), $this->faker->word()],  // Random tags in JSON
             'slug' => $this->faker->slug(),  // Random slug for SEO
             'is_active' => $this->faker->boolean(),  // Random active status

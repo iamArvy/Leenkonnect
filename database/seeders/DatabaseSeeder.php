@@ -49,6 +49,7 @@ class DatabaseSeeder extends Seeder
         //     ['name' => 'laptops'],
         //     ['name' => 'printers']
         // ];
+
         // foreach ($categories as $cat) {
         //     $category = Category::create($cat);
         //     Product::factory()
@@ -59,6 +60,6 @@ class DatabaseSeeder extends Seeder
         //         });
         // }
 
-        Testimonial::factory()->count(10)->create();
+        // Testimonial::factory()->count(10)->create();
     }
 }

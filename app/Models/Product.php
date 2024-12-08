@@ -23,9 +23,10 @@ class Product extends Model
         'price',
         'gallery',
         'model',
-        'brand',
+        'brand_id',
         'features',
         'tags',
+        'stock'
     ];
 
     // Specify which attributes should be cast to specific types
@@ -51,8 +52,10 @@ class Product extends Model
     // Mutator to ensure tags are stored as lowercase
     public function setTagsAttribute($value)
     {
-        // Ensure that tags are always stored as an array of lowercase strings
         $this->attributes['tags'] = json_encode(array_map('strtolower', (array) $value));
+    }
+    public function brand(){
+        return $this->belongsTo(Brand::class);
     }
 
     public function reviews() {
