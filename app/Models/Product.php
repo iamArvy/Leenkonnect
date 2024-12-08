@@ -123,10 +123,10 @@ class Product extends Model
     }
 
     // Example of a custom accessor (optional)
-    public function getPriceAttribute($value)
-    {
-        return number_format($value, 2); // Format the price to 2 decimal places
-    }
+    // public function getPriceAttribute($value)
+    // {
+    //     return number_format($value, 2); // Format the price to 2 decimal places
+    // }
 
     public function category() {
         return $this->belongsTo(Category::class);

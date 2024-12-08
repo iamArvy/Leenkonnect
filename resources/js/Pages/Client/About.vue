@@ -95,7 +95,7 @@
             </article>
         </div>
     </Section>
-    <Section>
+    <!-- <Section>
         <div class="flex flex-col gap-3">
             <article v-for="(item, index) in data" :key="index" class="px-12 py-6 bg-gray-300 grid grid-cols-3 items-center">
                 <h1 class="text-primary text-2xl font-bold text-center">{{ item.title }}</h1>
@@ -106,7 +106,7 @@
                 </ul>
             </article>
         </div>
-    </Section>
+    </Section> -->
 </ClientLayout>
 </template>
 

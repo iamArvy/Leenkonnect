@@ -3,7 +3,7 @@
         <!-- @vue-ignore -->
         <swiper v-bind="swiperOptions">
             <swiper-slide v-for="(service, index) in services" :key="index">
-                <div class="flex flex-col gap-4 border p-8 rounded-md min-h-[300px]">
+                <div class="flex flex-col gap-4 border p-8 rounded-md min-h-[300px] cursor-pointer">
                     <div></div>
                     <h3 class="text-xl font-bold">{{ service.name }}</h3>
                     <p>{{ service.description }}</p>

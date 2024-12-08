@@ -8,20 +8,28 @@
                     class="lg:rounded-tr-[50px] lg:self-center lg:h-[70%] bg-white p-3 lg:p-10 lg:absolute sm:w-[50%] lg:z-2 left-0 flex flex-col gap-4"
                 >
                     <h1
-                        class="font-bold text-4xl sm:3xl lg:text-5xl text-primary"
+                        class="font-bold text-4xl sm:2xl lg:text-4xl text-primary"
                     >
-                        Lorem ipsum dolor sit amet consectetur.
+                        Empowering buisinesses with innovative IT solutions.
                     </h1>
                     <p>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Iusto delectus, enim officia minima nam ea omnis
-                        quam sunt veniam nostrum.
+                        Your one stop solution for IT services and eccomerce technology needs.
+                        <Link :href="route('services')" class="italic underline">Learn More...</Link>
                     </p>
-                    <button
-                        class="py-2 px-4 bg-primary text-white rounded-lg w-fit"
-                    >
-                        Get Started
-                    </button>
+                    <div class="flex flex-row gap-3">
+                        <button
+                            class="py-2 px-4 bg-primary text-white rounded-lg w-fit"
+                        >
+                            Free Consultation
+                        </button>
+                        <button
+                            class="py-2 px-4 bg-primary text-white rounded-lg w-fit"
+                            @click="router.get(route('shop.index'))"
+                        >
+                            Shop Now
+                        </button>
+                    </div>
+
                 </div>
                 <figure
                     class="w-svw sm:w-[50%] lg:w-[70%] md:max-h-[480px] overflow-hidden rounded-bl-[50px]"
@@ -41,6 +49,9 @@
                     </p>
                 </div>
                 <ServicesCarousel :services="services" />
+                <div class="flex flex-row justify-center">
+                    <button class="p-2 border-white border rounded-xl bg-white text-primary font-bold" @click="router.get(route('services'))">View More</button>
+                </div>
             </div>
         </FullSection>
         <Section>
@@ -57,6 +68,9 @@
                         :key="index"
                         :product="item"
                     />
+                </div>
+                <div class="flex flex-row justify-center">
+                    <button class="p-2 border-primary border rounded-xl bg-white text-primary font-bold" @click="router.get(route('shop.index'))">View More</button>
                 </div>
             </div>
         </Section>
@@ -170,7 +184,7 @@ import ClientLayout from "@/Layouts/ClientLayout.vue";
 import Section from "@/Components/Client/Section.vue";
 import ServicesCarousel from "@/Components/Client/ServicesCarousel.vue";
 import ProductCard from "@/Components/Client/ProductCard.vue";
-import { router, useForm } from "@inertiajs/vue3";
+import { Link, router, useForm } from "@inertiajs/vue3";
 import { onMounted } from "vue";
 import TestimonialSwiper from "./partials/TestimonialSwiper.vue";
 import FullSection from "@/Components/Client/FullSection.vue";
@@ -205,6 +219,12 @@ const services = [
             "Streamline your operations with professional network setup services. We design, install, and configure reliable networks to keep your business connected and running efficiently.",
         image: "/images/service3.png",
     },
+    {
+        name: "Managed IT services",
+        description:
+            "Streamline your operations with professional network setup services. We design, install, and configure reliable networks to keep your business connected and running efficiently.",
+            image: "/images/service3.png",
+    }
 ];
 
 const contactform = useForm({
