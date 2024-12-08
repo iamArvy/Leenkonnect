@@ -130,6 +130,10 @@ const navs = [
                         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                             {{ $page.props.title }}
                         </h2>
+                        <nav>
+                            <NavLink :href="route('admin.dashboard')" v-for="">Dashboard</NavLink>
+                            <NavLink :href="route('admin.dashboard')">Users</NavLink>
+                        </nav>
                     </div>
                 </header>
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 ">

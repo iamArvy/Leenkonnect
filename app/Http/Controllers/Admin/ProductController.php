@@ -32,7 +32,7 @@ class ProductController extends Controller
         // $priceRange = $request->input('price_range'); // example: "0-100"
 
         // Start the query
-        $query = Product::latest();
+        $query = Product::latest() ?? null;
 
         // Apply search filter
         if ($search) {
@@ -56,8 +56,8 @@ class ProductController extends Controller
         // }
 
         // Get paginated results
-        $categories = Category::all();
-        $brands = Brand::all();
+        $categories = Category::all() ?? null;
+        $brands = Brand::all() ?? null;
         $products = $query->paginate(12)->withQueryString(); // Ensure query string persists
         return inertia('Admin/Products', [
             'title' => 'Products',
