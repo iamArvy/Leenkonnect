@@ -27,45 +27,29 @@ const navs = [
         active: route().current('admin.dashboard'),
     },
     {
-        name: 'Store',
-        children: [
-            {
-                name: 'Categories',
-                href: route('admin.categories.index'),
-                active: route().current('admin.categories.index'),
-            },
-            {
-                name: 'Products',
-                href: route('admin.products.index'),
-                active: route().current('admin.products.index'),
-            }
-        ],
-        get active() {
-            return this.children.some(child => child.active);
-        }
+        name: 'Categories',
+        href: route('admin.categories.index'),
+        active: route().current('admin.categories.index'),
     },
     {
-        name: 'Consultation',
-        children: [
-            {
-                name: 'Bookings',
-                href: route('admin.bookings.index'),
-                active: route().current('admin.bookings.index'),
-            },
-            {
-                name: 'Consultants',
-                href: route('admin.consultants.index'),
-                active: route().current('admin.consultants.index'),
-            },
-            {
-                name: 'Services',
-                href: route('admin.services.index'),
-                active: route().current('admin.services.index'),
-            }
-        ],
-        get active() {
-            return this.children.some(child => child.active);
-        }
+        name: 'Products',
+        href: route('admin.products.index'),
+        active: route().current('admin.products.index'),
+    },
+    {
+        name: 'Bookings',
+        href: route('admin.bookings.index'),
+        active: route().current('admin.bookings.index'),
+    },
+    {
+        name: 'Consultants',
+        href: route('admin.consultants.index'),
+        active: route().current('admin.consultants.index'),
+    },
+    {
+        name: 'Services',
+        href: route('admin.services.index'),
+        active: route().current('admin.services.index'),
     },
     {
         name: 'Customers',
@@ -73,27 +57,19 @@ const navs = [
         active: route().current('admin.customers.index'),
     },
     {
-        name: 'Access Management',
-        children: [
-            {
-                name: 'Roles',
-                href: route('admin.roles.index'),
-                active: route().current('admin.roles.index'),
-            },
-            {
-                name: 'Permissions',
-                href: route('admin.permissions.index'),
-                active: route().current('admin.permissions.index'),
-            },
-            {
-                name: 'Users',
-                href: route('admin.users.index'),
-                active: route().current('admin.users.index'),
-            }
-        ],
-        get active() {
-            return this.children.some(child => child.active);
-        }
+        name: 'Roles',
+        href: route('admin.roles.index'),
+        active: route().current('admin.roles.index'),
+    },
+    {
+        name: 'Permissions',
+        href: route('admin.permissions.index'),
+        active: route().current('admin.permissions.index'),
+    },
+    {
+        name: 'Users',
+        href: route('admin.users.index'),
+        active: route().current('admin.users.index'),
     }
 ]
 </script>
@@ -105,13 +81,13 @@ const navs = [
         <Banner />
 
         <div class="min-h-screen bg-gray-100 flex flex-row gap-2">
-            <nav class="w-60 p-2 min-h-screen max-h-screen overflow-y-auto bg-white flex flex-col gap-2">
+            <nav class="w-60 p-2 min-h-screen max-h-screen overflow-y-auto bg-white flex flex-col gap-4">
                 <header>
-                    <h1>Emporium</h1>
+                    <h1 class="text-center p-3 font-bold">Leenkonnect</h1>
                 </header>
-                <ul class="flex-grow">
+                <ul class="flex-grow overflow-y-auto">
                     <li v-for="link in navs" :key="link.name">
-                        <ResponsiveNavLink :href="link.route" :active="$page.url === link.route"><i :class="link.icon"></i>{{ link.name }}</ResponsiveNavLink>
+                        <ResponsiveNavLink :href="link.href" :active="link.active"><i :class="link.icon"></i>{{ link.name }}</ResponsiveNavLink>
                     </li>
                 </ul>
                 <footer>
@@ -130,10 +106,6 @@ const navs = [
                         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                             {{ $page.props.title }}
                         </h2>
-                        <nav>
-                            <NavLink :href="route('admin.dashboard')" v-for="">Dashboard</NavLink>
-                            <NavLink :href="route('admin.dashboard')">Users</NavLink>
-                        </nav>
                     </div>
                 </header>
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 ">
