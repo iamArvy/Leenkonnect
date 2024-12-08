@@ -4,15 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\ConsultationService;
 class ServiceController extends Controller
 {
     public function index(){
-        // $ = Category::paginate(12);
-        // dd('here');
+        $services = ConsultationService::paginate(12);
         return inertia('Admin/Services', [
             'title' => 'Services',
-            // 'categories'=> $categories
+            'categories'=> $services
         ]);
     }
 

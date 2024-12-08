@@ -8,7 +8,7 @@ use App\Models\Category;
 class CategoryController extends Controller
 {
     public function index(){
-        $categories = Category::paginate(12);
+        $categories = Category::paginate(12) ?? null;
         return inertia('Admin/Categories', [
             'title' => 'Categories',
             'categories'=> $categories
@@ -20,6 +20,13 @@ class CategoryController extends Controller
     }
 
     public function store(Request $request) {
+        $request->validate([
+            'name' => 'required',
+            // 'description' => 'required',
+        ]);
+
+        Category::create($request->all());
+        return back()->with('success', 'Category created successfully.');
         // Save a new product
     }
 

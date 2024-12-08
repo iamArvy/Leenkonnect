@@ -32,6 +32,11 @@ const navs = [
         active: route().current('admin.categories.index'),
     },
     {
+        name: 'Brands',
+        href: route('admin.brands.index'),
+        active: route().current('admin.brands.index'),
+    },
+    {
         name: 'Products',
         href: route('admin.products.index'),
         active: route().current('admin.products.index'),
@@ -56,21 +61,21 @@ const navs = [
         href: route('admin.customers.index'),
         active: route().current('admin.customers.index'),
     },
-    {
-        name: 'Roles',
-        href: route('admin.roles.index'),
-        active: route().current('admin.roles.index'),
-    },
-    {
-        name: 'Permissions',
-        href: route('admin.permissions.index'),
-        active: route().current('admin.permissions.index'),
-    },
-    {
-        name: 'Users',
-        href: route('admin.users.index'),
-        active: route().current('admin.users.index'),
-    }
+    // {
+    //     name: 'Roles',
+    //     href: route('admin.roles.index'),
+    //     active: route().current('admin.roles.index'),
+    // },
+    // {
+    //     name: 'Permissions',
+    //     href: route('admin.permissions.index'),
+    //     active: route().current('admin.permissions.index'),
+    // },
+    // {
+    //     name: 'Users',
+    //     href: route('admin.users.index'),
+    //     active: route().current('admin.users.index'),
+    // }
 ]
 </script>
 

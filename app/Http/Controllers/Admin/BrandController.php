@@ -3,19 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use Illuminate\Http\Request;
-use App\Models\Booking;
-class BookingsController extends Controller
+
+class BrandController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $bookings = Booking::latest()->with('user', 'services')->paginate(12);
-        return inertia('Admin/Categories', [
-            'title' => 'Bookings',
-            'categories'=> $bookings
+        $brands = Brand::latest()->paginate(12) ?? null;
+        // dd($brands);
+        return inertia('Admin/Brands', [
+            'title' => 'Brands',
+            'brands'=> $brands
         ]);
     }
 
@@ -32,7 +34,13 @@ class BookingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            // 'description' => 'required',
+        ]);
+
+        Brand::create($request->all());
+        return back()->with('success', 'Category created successfully.');
     }
 
     /**
