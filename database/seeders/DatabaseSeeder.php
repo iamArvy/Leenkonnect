@@ -7,11 +7,13 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Product;
-use App\Models\Review;
-use App\Models\Category;
+use App\Models\Store\Product;
+use App\Models\Store\Review;
+use App\Models\Store\Category;
 use App\Models\Testimonial;
-
+use App\Models\Store\Promotion;
+use App\Models\Blog;
+use App\Models\BlogCategory;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -61,5 +63,25 @@ class DatabaseSeeder extends Seeder
         // }
 
         // Testimonial::factory()->count(10)->create();
+
+        // $promotion = Promotion::where(['name' => 'featured'])->first();
+        // $products = Product::isFeatured()->get();
+
+        // foreach($products as $product){
+        //     $product->promotions()->attach($promotion->id);
+        // }
+        Blog::truncate();
+        BlogCategory::truncate();
+        $categories = [
+            ['name' => 'laptops'],
+            ['name' => 'printers']
+        ];
+
+        foreach ($categories as $cat) {
+            $category = BlogCategory::create($cat);
+            Blog::factory()
+                ->count(60)
+                ->create(['category_id' => $category->id]);
+        }
     }
 }

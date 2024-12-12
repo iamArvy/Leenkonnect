@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Order;
-use App\Models\Product;
+use App\Models\Store\Order;
+use App\Models\Store\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderItemFactory extends Factory
 {
-    protected $model = \App\Models\OrderItem::class;
+    protected $model = \App\Models\Store\OrderItem::class;
 
     public function definition()
     {

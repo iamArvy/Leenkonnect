@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\Product;
+use App\Models\Store\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Generator as Faker;
-use App\Models\Category;
+use App\Models\Store\Category;
 use App\Models\Brand;
 class ProductFactory extends Factory
 {

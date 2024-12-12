@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\FeaturedProduct;
-use App\Models\Product;
+use App\Models\Store\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FeaturedProductFactory extends Factory

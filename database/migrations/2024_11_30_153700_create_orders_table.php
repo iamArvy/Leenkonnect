@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('order_number')->unique(); // Ensure order_number is unique
             $table->string('session_id');
             $table->foreign('session_id')->references('id')->on('sessions')->onDelete('cascade');
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade'); // Nullable for guest orders
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->integer('total');
             $table->enum('status', ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'])->default('pending');
             $table->timestamps();

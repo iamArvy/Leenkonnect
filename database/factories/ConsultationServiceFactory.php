@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\ConsultationService;
+use App\Models\Consultation\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ConsultationServiceFactory extends Factory

@@ -12,8 +12,10 @@ class BlogFactory extends Factory
     public function definition()
     {
         return [
+            'category_id' => BlogCategoryFactory::new()->create()->id, // Assuming you have a BlogCategoryFactory
+            'image' => $this->faker->imageUrl(800, 600), // Random image URL
             'title' => $this->faker->sentence, // Random title
-            'content' => $this->faker->paragraphs(3, true), // Random content as a string, you can change this based on the structure of your content
+            'content' =>['text' => $this->faker->paragraphs(3, true), ] , // Random content as a string, you can change this based on the structure of your content
         ];
     }
 }

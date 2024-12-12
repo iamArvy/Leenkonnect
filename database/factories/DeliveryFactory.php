@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Order;
+use App\Models\Store\Order;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class DeliveryFactory extends Factory
 {
-    protected $model = \App\Models\Delivery::class;
+    protected $model = \App\Models\Store\Delivery::class;
 
     public function definition()
     {

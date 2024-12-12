@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\Booking;
-use App\Models\Consultant;
-use App\Models\ConsultationService;
+use App\Models\Consultation\Booking;
+use App\Models\Consultation\Consultant;
+use App\Models\Consultation\Service;
 use App\Models\User;
 use App\Models\Session;
 use Illuminate\Database\Eloquent\Factories\Factory;

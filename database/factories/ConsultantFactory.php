@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Consultant;
-use App\Models\ConsultationService;
+use App\Models\Consultation\Consultant;
+use App\Models\Consultation\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ConsultantFactory extends Factory
