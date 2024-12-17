@@ -1,5 +1,5 @@
 <template>
-    <div class="my-8 w-full">
+    <div class=" w-full">
         <Section >
             <slot />
         </Section>

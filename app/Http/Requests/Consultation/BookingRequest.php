@@ -25,7 +25,7 @@ class BookingRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'message' => 'nullable|string|max:255',
-            'specialisation_id' => 'required|exists:specialisations',
+            'specialisation_id' => 'required|exists:specialisations,id',
             'date' => 'required|date',
             'time' => [
                 'required',

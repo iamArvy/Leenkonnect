@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ClientLayout from '@/Layouts/ClientLayout.vue';
 import { useForm } from '@inertiajs/vue3';
+// @ts-ignore
 import statesData from '../../../assets/nigeria.json';
 import { ref } from 'vue';
 import Section from '@/Components/Client/Section.vue';

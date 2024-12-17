@@ -16,8 +16,8 @@ class PagesController extends Controller
         $promotion = Promotion::latest()->where('name', 'featured')->first();
         $featuredProducts = $promotion ? $promotion->products()->take(4)->get() : null;
         $testimonials = Testimonial::latest()->limit(9)->get();
-        $blogs = Post::latest()->limit(3)->get();
-        return Inertia::render('Client/Home',['featuredProducts'=>$featuredProducts, 'testimonials' => $testimonials, 'blogs' => $blogs]);
+        $blog = Post::with('category')->latest()->limit(3)->get();
+        return Inertia::render('Client/Home',['featuredProducts'=>$featuredProducts, 'testimonials' => $testimonials, 'blog' => $blog]);
     }
 
     public function services()

@@ -1,5 +1,5 @@
 <template>
-     <footer class="bg-primary text-white font-satoshi w-full">
+     <footer class="bg-[#2d2d2d] text-white font-satoshi w-full">
         <!-- <section class="grid grid-cols-2 max-w-screen-xl mx-auto bg-black px-8 rounded-xl absolute top-[-80px] h-[190px] items-center">
                 <h1 class="text-4xl text-white self-center">Stay up to date about our latest offers</h1>
             <div class="grid grid-rows-2 gap-2">

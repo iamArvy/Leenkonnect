@@ -94,18 +94,7 @@
                 </div>
             </div>
         </FullSection>
-        <Section>
-            <div class="grid grid-cols-3">
-                <div>
-                    <img src="" alt="" />
-                    <div>
-                        <h3></h3>
-                        <hr />
-                    </div>
-                </div>
-            </div>
-        </Section>
-        <FullSection class="bg-[#1b2c61] bg-[url('/images/servicesbg.png')]">
+        <FullSection class="bg-primary bg-[url('/images/servicesbg.png')]">
             <div class="flex flex-col gap-4">
                 <h2 class="text-center font-bold text-xl text-white">
                     Contact Us
@@ -176,6 +165,22 @@
                 </form>
             </div>
         </FullSection>
+        <Section>
+            <div class="flex flex-col gap-4">
+                <div>
+                    <h2 class="font-semibold text-center mb-2">Our Blog</h2>
+                    <p class="text-2xl md:text-4xl font-bold text-center">
+                        Latest Articles
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <BlogCard v-for="(item, index) in blog" :key="index" :blog="item" />
+                </div>
+                <div class="flex flex-row justify-center">
+                    <button class="p-2 border-primary border rounded-xl bg-white text-primary font-bold" @click="router.get(route('blog.index'))">View More</button>
+                </div>
+            </div>
+        </Section>
     </ClientLayout>
 </template>
 
@@ -190,11 +195,13 @@ import TestimonialSwiper from "./partials/TestimonialSwiper.vue";
 import FullSection from "@/Components/Client/FullSection.vue";
 import TextInput from "@/Components/Admin/TextInput.vue";
 import InputError from "@/Components/Admin/InputError.vue";
+import BlogCard from "@/Components/Client/BlogCard.vue";
 // import { route } from 'vendor/tightenco/ziggy/src/js';
 
 const props = defineProps<{
     featuredProducts: Array<any>;
     testimonials: Array<any>;
+    blog: Array<any>;
 }>();
 
 onMounted(() => {
