@@ -12,8 +12,8 @@ use App\Models\Store\Review;
 use App\Models\Store\Category;
 use App\Models\Testimonial;
 use App\Models\Store\Promotion;
-use App\Models\Blog;
-use App\Models\BlogCategory;
+use App\Models\Blog\Blog;
+use App\Models\Blog\Category as BlogCategory;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -22,7 +22,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // $role = Role::findOrCreate('superuser');
-        // $newpermissions = ['create users', 'assign users', 'view dashboard'];
+        // $newpermissions = [
+        //     'create users',
+        //     'assign users',
+        //     'view dashboard',
+        //     'control access',
+        //     'view store'
+        // ];
 
         // foreach ($newpermissions as $permission) {
         //     Permission::findOrCreate($permission);
@@ -33,7 +39,6 @@ class DatabaseSeeder extends Seeder
         // $email = env('SUPERUSER_EMAIL', 'default@example.com'); // Default fallback value
         // $password = env('SUPERUSER_PASSWORD', 'defaultPassword');
         // $user = User::where('email', $email)->first();
-        // // dd($email);
         // if(!$user){
         //     $user = User::create([
         //         'name' => 'superuser',
@@ -43,44 +48,37 @@ class DatabaseSeeder extends Seeder
         // }
         // $user->assignRole($role);
 
-
-        // Category::truncate(); // Clears all categories and cascades to products if setup
-        // Product::truncate(); // Optional if cascade doesn't handle it
-        // Review::truncate();  // Optional if cascade doesn't handle it
         // $categories = [
         //     ['name' => 'laptops'],
         //     ['name' => 'printers']
         // ];
+        $categories = BlogCategory::all();
+        foreach ($categories as $cat) {
+            // $category = Category::create(['name' => 'printers']);
+            Product::factory()
+                ->count(60)
+                ->create(['category_id' => $category->id])
+                ->each(function ($product) {
+                    Review::factory()->count(5)->create(['product_id' => $product->id]);
+                });
+        }
 
-        // foreach ($categories as $cat) {
-        //     $category = Category::create($cat);
-        //     Product::factory()
-        //         ->count(60)
-        //         ->create(['category_id' => $category->id])
-        //         ->each(function ($product) {
-        //             Review::factory()->count(5)->create(['product_id' => $product->id]);
-        //         });
-        // }
+        Testimonial::factory()->count(10)->create();
 
-        // Testimonial::factory()->count(10)->create();
-
-        // $promotion = Promotion::where(['name' => 'featured'])->first();
-        // $products = Product::isFeatured()->get();
-
-        // foreach($products as $product){
-        //     $product->promotions()->attach($promotion->id);
-        // }
-        Blog::truncate();
-        BlogCategory::truncate();
-        $categories = [
+        $promotion = Promotion::create(['name' => 'featured']);
+        $products = Product::all();
+        foreach($products as $product){
+            $product->promotions()->attach($promotion->id);
+        }
+        $blogcategories = [
             ['name' => 'laptops'],
             ['name' => 'printers']
         ];
 
-        foreach ($categories as $cat) {
+        foreach ($blogcategories as $cat) {
             $category = BlogCategory::create($cat);
             Blog::factory()
-                ->count(60)
+                ->count(20)
                 ->create(['category_id' => $category->id]);
         }
     }

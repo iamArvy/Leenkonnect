@@ -5,18 +5,9 @@
                 <button @click="closeNav()" class="md:hidden">Close</button>
                 <h1 class="text-2xl font-bold">Leenkonnect</h1>
             </header>
-            <nav class="gap-2 text-lg flex flex-col p-4">
-                <details class="group [&_summary::-webkit-details-marker]:hidden">
-                    <summary>Company</summary>
-                    <ul class="p-2 px-4 flex flex-col gap-2">
-                        <li><Link :href="route('about')">About</Link></li>
-                        <li><Link :href="route('services')">Services</Link></li>
-                    </ul>
-                </details>
-                    <Link :href="route('shop.index')">Shop</Link>
-                    <Link :href="route('home')">Blog</Link>
-                    <Link :href="route('home')">Contact</Link>
-                </nav>
+            <nav class="gap-2 text-lg flex flex-col p-4 text-center">
+                <Link v-for="(nav, index) in navs" :key="index" :href="nav.href" class=" border border-primary px-3" :class="nav.active ? 'text-primary border-2 font-bold' : null">{{ nav.name }}</Link>
+            </nav>
         </div>
     </div>
 </template>

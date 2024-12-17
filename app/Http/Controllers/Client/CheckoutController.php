@@ -4,50 +4,78 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Store\Product;
+use App\Models\Store\Order;
+use App\Models\Store\OrderItem;
+use App\Models\Store\Delivery;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderDetailsMail;
+use App\Services\CartService;
 
 class CheckoutController extends Controller
 {
     public function index()
     {
-        return view('client.checkout');
+        $cart = app(CartService::class)->getCart();
+        if(!$cart || $cart == []) return back()->with('error');
+        return inertia('Client/Checkout');
     }
 
     public function store(Request $request)
     {
+        $cart = app(CartService::class)->getCart();
+        if(!$cart || $cart == []) return back()->with('error');
+
         $request->validate([
             'name' => 'required',
             'email' => 'required',
             'phone' => 'required',
             'address' => 'required',
-            'note' => 'required',
+            'city' => 'required',
+            'state' => 'required'
         ]);
 
-        $cart = session()->get('cart');
+        $address = [
+            'address' => $request->address,
+            'city' => $request->city,
+            'state' => $request->state
+        ];
         $total = 0;
         foreach ($cart as $item) {
-            $total += $item['price'] * $item['quantity'];
+            $total += $item['total'];
         }
 
-        $order = new Order();
-        $order->name = $request->name;
-        $order->email = $request->email;
-        $order->phone = $request->phone;
-        $order->address = $request->address;
-        $order->note = $request->note;
-        $order->total = $total;
-        $order->save();
+        $user_id = auth()->user() ? auth::user()->id : null;
+        $order = Order::create([
+            'order_number' => 'ORD-' . time(),
+            'total' => $total,
+            'user_id' => $user_id,
+        ]);
 
         foreach ($cart as $item) {
-            $orderItem = new OrderItem();
-            $orderItem->order_id = $order->id;
-            $orderItem->product_id = $item['id'];
-            $orderItem->quantity = $item['quantity'];
-            $orderItem->price = $item['price'];
-            $orderItem->save();
+            OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $item['id'],
+                'quantity' => $item['quantity'],
+                'price' => $item['price'],
+            ]);
         }
 
-        session()->forget('cart');
+        $delivery = Delivery::create([
+            'order_id' => $order->id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $address
+        ]);
 
-        return redirect()->route('checkout.success');
+        session()->forget('cart');
+        Mail::send(new OrderDetailsMail([
+            'order' => $order,
+            'delivery' => $delivery,
+            'items' => $cart
+        ]));
+        // return redirect()->route('checkout.success');
     }
 }

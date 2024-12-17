@@ -10,14 +10,14 @@
         </div>
         <Section>
             <div class="flex flex-col gap-3">
-                <article v-for="(item, index) in data" :key="index" class="px-12 py-6 bg-gray-300 grid grid-cols-3 items-center">
-                    <h1 class="text-primary text-2xl font-bold text-center">{{ item.title }}</h1>
+                <details v-for="(item, index) in data" :key="index" class="px-12 py-6 bg-gray-300 grid grid-cols-3 items-center">
+                    <summary class="text-primary text-2xl font-bold ">{{ item.title }}</summary>
                     <ul class="col-span-2 flex flex-col gap-2">
                         <li v-for="(service, index) in item.services" :key="index" class="list-disc">
                             <p>{{ service }}</p>
                         </li>
                     </ul>
-                </article>
+                </details>
             </div>
         </Section>
     </ClientLayout>

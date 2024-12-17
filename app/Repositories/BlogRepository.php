@@ -1,7 +1,7 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\Blog;
+use App\Models\Blog\Blog;
 
 class BlogRepository
 {

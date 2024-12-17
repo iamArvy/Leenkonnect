@@ -1,15 +1,17 @@
 <template>
     <ClientLayout title="Shop">
         <!-- <Section> -->
+            <CategorySwiper :title="item.name" :href="item.slug" class="max-w-screen-lg mx-auto p-4" v-for="(item, index) in promotions" :key="index">
+                <swiper v-bind="swiperOptions">
+                    <swiper-slide v-for="product in item.products" :key="product.id">
+                        <ProductCard :product="product" />
+                    </swiper-slide>
+                </swiper>
+            </CategorySwiper>
             <CategorySwiper :title="item.name" :href="item.slug" class="max-w-screen-lg mx-auto p-4" v-for="(item, index) in categories" :key="index">
                 <swiper v-bind="swiperOptions">
                     <swiper-slide v-for="product in item.products" :key="product.id">
-                        <!-- <div> -->
-                            <ProductCard :product="product" />
-                        <!-- </div> -->
-                        <!-- <div class="swiper-zoom-container">
-                            <img :src="product.image" :alt="product.name" class="w-full h-full object-cover">
-                        </div> -->
+                        <ProductCard :product="product" />
                     </swiper-slide>
                 </swiper>
             </CategorySwiper>
@@ -26,7 +28,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import { onMounted, ref } from 'vue';
 const props = defineProps<{
-    featuredProducts: any,
+    promotions: any,
     categories: any
 }>()
 onMounted(()=>{

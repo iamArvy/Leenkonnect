@@ -1,7 +1,7 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\Delivery;
+use App\Models\Store\Delivery;
 
 class DeliveryRepository
 {

@@ -25,6 +25,8 @@ return new class extends Migration
         Schema::create('testimonials', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('image')->nullable();
+            $table->string('caption');
             $table->string('occupation')->nullable(); // Nullable if occupation is optional
             $table->text('content');
             $table->timestamps();

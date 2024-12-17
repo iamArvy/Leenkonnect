@@ -13,6 +13,7 @@ class TestimonialFactory extends Factory
         return [
             'name' => $this->faker->name,
             'image' => $this->faker->imageUrl(800, 600),
+            'caption' => $this->faker->sentence,
             'occupation' => $this->faker->jobTitle, // Optional occupation
             'content' => $this->faker->paragraph,
         ];

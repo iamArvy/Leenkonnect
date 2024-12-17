@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('categories', function(Blueprint $table){
             $table->id();
-            $table->string('name');
-            $table->string('slug')->unique();
+            $table->string('name')->unique();
             $table->timestamps();
         });
 
@@ -25,17 +24,14 @@ return new class extends Migration
             $table->string('image', 2048);
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->text('description');
-            $table->decimal('price', 8, 2);
+            $table->integer('price');
             $table->json('gallery')->nullable();
-            $table->integer('stock')->default(0);
-            $table->string('model')->nullable();
-            $table->string('brand')->nullable();
+            $table->integer('stock');
             $table->json('features')->nullable();
             $table->json('tags')->nullable();
             $table->string('slug')->unique();
-            $table->boolean('is_active')->default(true);
-            $table->boolean('is_featured')->default(false);
             $table->timestamps();
+            $table->softDeletes();
             $table->index('sku');
         });
 

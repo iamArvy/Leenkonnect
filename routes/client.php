@@ -8,6 +8,10 @@ Route::namespace(App\Http\Controllers\Client::class)->group(function () {
     Route::get('/faq', 'PagesController@faq')->name('faq');
     Route::get('/services', 'PagesController@services')->name('services');
 
+
+    Route::post('/paystack_pay', 'PaymentController@redirectToGateway')->name('pay');
+    Route::get('/payment/callback', 'PaymentController@handleGatewayCallback')->name('payment.callback');
+
     Route::group([
         'as'=>'cart.',
         'prefix'=>'/cart'
@@ -24,7 +28,8 @@ Route::namespace(App\Http\Controllers\Client::class)->group(function () {
         'prefix'=>'/shop'
     ], function () {
         Route::get('/', 'ShopController@index')->name('index');
-        Route::get('/catalog/{category}', 'ShopController@catalog')->name('catalog');
+        Route::get('/catalog', 'ShopController@catalog')->name('catalog');
+        Route::get('/product/{slug}', 'ShopController@product')->name('product');
     });
 
     Route::group([
@@ -41,8 +46,8 @@ Route::namespace(App\Http\Controllers\Client::class)->group(function () {
         'as'=>'checkout.',
         'prefix'=>'/checkout'
     ], function () {
-        Route::get('/', 'CartController@checkout')->name('get');
-        Route::post('/', 'OrderController@store')->name('post');
+        Route::get('/', 'CheckoutController@index')->name('index');
+        Route::post('/', 'CheckoutController@store')->name('order');
     });
 
     Route::group([
@@ -50,6 +55,6 @@ Route::namespace(App\Http\Controllers\Client::class)->group(function () {
         'prefix'=>'/blog'
     ], function(){
         Route::get('/', 'BlogController@index')->name('index');
-        Route::get('/{slug}', 'BlogController@show')->name('show');
+        Route::get('/{blog}', 'BlogController@show')->name('show');
     });
 });

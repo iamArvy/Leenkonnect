@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('order_number')->unique(); // Ensure order_number is unique
-            $table->string('session_id');
-            $table->foreign('session_id')->references('id')->on('sessions')->onDelete('cascade');
+            $table->string('order_number')->unique(); // Ensure order_number is unique
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->integer('total');
             $table->enum('status', ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'])->default('pending');
@@ -31,6 +29,7 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->integer('quantity');
+            $table->integer('price');
             $table->timestamps();
 
             // Index for frequently queried columns
@@ -42,11 +41,13 @@ return new class extends Migration
 
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->enum('status', ['pending', 'shipped', 'delivered'])->default('pending');
             $table->json('address');
             $table->string('phone');
             $table->string('email');
+            $table->timestamps();
 
             // Index for order_id in deliveries table
             $table->index('order_id');

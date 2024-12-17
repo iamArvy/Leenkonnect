@@ -1,6 +1,6 @@
 <?php
 namespace App\Repositories;
-use App\Models\Product;
+use App\Models\Store\Product;
 
 class CartRepository
 {
